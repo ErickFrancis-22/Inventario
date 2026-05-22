@@ -8,5 +8,6 @@ type Movimiento struct {
 	UsuarioID     int `json:"usuario_id" db:"usuario_id"`
 	Tipo          string `json:"tipo" db:"tipo"`
 	Cantidad 	  int `json:"cantidad" db:"cantidad"`
-	FechaCreacion time.Time `json:"fecha_creacion" id:"fecha_creacion"`
+	FechaCreacion time.Time `json:"fecha_creacion" db:"fecha_creacion"`
 }
+
