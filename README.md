@@ -33,11 +33,11 @@ This project is built with a modern stack, strictly separating the server logic 
 
 To run this project on your local environment, you need to have Node.js (https://nodejs.org/), Go (https://go.dev/), and Docker (https://www.docker.com/) installed.
 
-### 1. Setting Up the Database and Backend
+Setting Up the Database and Backend
 Make sure Docker is running and execute:
 ```bash
 docker-compose up -d
-###2. Setting Up the Frontend
+Setting Up the Frontend
 Open a new terminal, navigate to the client folder, and start the Vite server:
 Bash
 cd frontend
