@@ -1,0 +1,15 @@
+# Dependencias de Node
+node_modules/
+
+# Archivos de entorno (donde van tus contraseñas)
+.env
+
+# Binarios de Go y archivos temporales
+*.exe
+*.o
+*.out
+bin/
+
+# Carpetas de configuración de IDEs
+.vscode/
+.idea/

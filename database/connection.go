@@ -14,7 +14,7 @@ var DB *sql.DB //Variable global que guradará el Pool "conexiones"
 func ConnectDB() {
 	//Ocultar esto en las variables de entorno
 	//Datos de conexión don la DB
-	dsn := "host=localhost port=5432 user=postgres password=fran21$23 dbname=inventario sslmode=disable"
+	dsn := "host=db port=5432 user=postgres password=fran21$23 dbname=inventario sslmode=disable"
 
 	//Establecer la conexión
 	var err error
