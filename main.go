@@ -7,6 +7,7 @@ import (
 
 	"github.com/ErickFrancis-22/inventario-api/controllers"
 	"github.com/ErickFrancis-22/inventario-api/database" //Enlace del repositorio del GitHub
+	"golang.org/x/crypto/bcrypt"
 )
 
 func main() {
@@ -26,7 +27,6 @@ func main() {
 		case http.MethodPost:
 			controllers.CrearCategoria(w, r)
 		default:
-			// Si intentan usar un método raro (PUT, DELETE) que aún no configuramos:
 			http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
 		}
 	})
@@ -40,7 +40,6 @@ func main() {
 		case http.MethodPost:
 			controllers.CrearProveedor(w, r)
 		default:
-			// Si intentan usar un método raro (PUT, DELETE) que aún no configuramos:
 			http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
 		}
 	})		
@@ -54,7 +53,6 @@ func main() {
 		case http.MethodPost:
 			controllers.CrearProducto(w, r)
 		default:
-			// Si intentan usar un método raro (PUT, DELETE) que aún no configuramos:
 			http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
 		}
 	})	
@@ -68,7 +66,6 @@ func main() {
 		case http.MethodPost:
 			controllers.CrearRol(w, r)
 		default:
-			// Si intentan usar un método raro (PUT, DELETE) que aún no configuramos:
 			http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
 		}	
 	})
@@ -82,7 +79,6 @@ func main() {
 		case http.MethodPost:	
 			controllers.CrearUsuario(w, r)
 		default:
-			// Si intentan usar un método raro (PUT, DELETE) que aún no configuramos:
 			http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
 		}	
 	})
@@ -96,7 +92,6 @@ func main() {
 		case http.MethodPost:	
 			controllers.CrearMovimiento(w, r)
 		default:
-			// Si intentan usar un método raro (PUT, DELETE) que aún no configuramos:
 			http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
 		}	
 	})
@@ -108,13 +103,29 @@ func main() {
 			http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
 		}
 	})
+	http.HandleFunc("/login", controllers.Login(database.DB))
+	
 
-	//para manetner encendido el servidor
+	//Crear un usuario admin por defecto (si no existe) para facilitar el acceso inicial al sistema
+	hashSecreto, _ := bcrypt.GenerateFromPassword([]byte("admin123"), 10)
+	
+	// Columnas de la tabla: nombre, email, password_hash, rol_id
+	_, errAdmin := database.DB.Exec(`
+		INSERT INTO usuarios (nombre, email, password_hash, rol_id) 
+		VALUES ($1, $2, $3, $4) 
+		ON CONFLICT (email) DO NOTHING
+	`, "Admin Principal", "admin@techsocietysv.com", string(hashSecreto), 1)
+
+	if errAdmin != nil {
+		fmt.Println("🚨 Error al crear el admin:", errAdmin)
+	} else {
+		fmt.Println("✅ Usuario admin verificado en la base de datos.")
+	}
+
 	fmt.Println("El servidor está escuchando en: http://localhost:8080")
 	
-	// ¡Esta es la línea vital que mantiene el programa vivo!
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatalf("Error al iniciar el servidor: %v\n", err)
 	}
-}
+} 
