@@ -1,19 +1,49 @@
-# Inventario API 📦
+#Inventory Management System 📦
 
-Professional-grade inventory management system designed for scalability and efficiency. This project utilizes a robust backend architecture in Go to handle business transactions and a modern frontend to provide a seamless user experience.
+DeskSV is a full-stack enterprise resource planning (ERP) and inventory management platform designed to efficiently manage your product catalog and control stock inflows and outflows in real time.
 
-## 🛠 Tech Stack
-- **Backend**: Go (Golang)
-- **Frontend**: React, Tailwind CSS, Vite
-- **Database**: PostgreSQL
-- **Infrastructure**: Docker, Docker Compose
 
-## 🚀 Key Features
-- **Scalable REST API**: Built with Go for high-performance data processing.
-- **Role-Based Access**: Secure CRUD operations for users, roles, and inventory movements.
-- **Dockerized Environment**: Easily deployable using `docker-compose`.
+## 🚀 Technologies Used
 
-## ⚙️ How to run
-1. Clone the repository: `git clone https://github.com/ErickFrancis-22/Inventario.git`
-2. Set up your environment variables.
-3. Launch the services: `docker-compose up --build`
+This project is built with a modern stack, strictly separating the server logic from the user interface:
+
+### Backend (REST API)
+* **Language:** Go (Golang)
+* **Database:** PostgreSQL
+* **Infrastructure:** Docker & Docker Compose
+
+### Frontend (Single Page Application)
+* **Library:** React
+* **Build Tool:** Vite
+* **Styles:** Tailwind CSS
+* **Routation:** React Router DOM
+* **Icons:** Boxicons
+
+## ✨ Main Features
+
+* **Dashboard:** General catalog overview with reactive stock calculation.
+
+* **Product Management (CRUD):** Creation, reading, and deletion of products (SKU, name, price, category, supplier).
+
+* **Movement Log:** Control of incoming (purchases/manufacturing) and outgoing (sales/shrinkage) items that dynamically update available inventory.
+
+* **Reactive Interface:** Smooth navigation without page reloads (SPA) and a design adapted to modern UI/UX standards.
+
+## 🛠️ Installation and Use
+
+To run this project on your local environment, you need to have Node.js (https://nodejs.org/), Go (https://go.dev/), and Docker (https://www.docker.com/) installed.
+
+### 1. Setting Up the Database and Backend
+Make sure Docker is running and execute:
+```bash
+docker-compose up -d
+###2. Setting Up the Frontend
+Open a new terminal, navigate to the client folder, and start the Vite server:
+Bash
+cd frontend
+npm install
+npm run dev
+The frontend will be available at http://localhost:5173/ and will consume the API hosted on port 8080.
+
+👨‍💻 Author
+Erick Francis - Software Developer
